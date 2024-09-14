@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskToYaana</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container-fluid {
+            height: 100vh;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .navbar-nav .nav-item {
+            margin-left: 10px;
+        }
+        .text-generation-section {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            
+        }
+        .text-generation-section > div {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .text-generation-section .input-section {
+            border-right: 1px solid #ddd;
+        }
+        .styled-input {
+            
+            width: 100%; /* Full width */
+            padding: 10px; /* Space inside the input */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 16px; /* Larger font size */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+        }
+        .overflow {
+            overflow-y: auto;
+        }
+        .records-table {
+            width: 100%;
+            border-collapse: collapse; /* Ensures borders are cleanly collapsed */
+        }
+        
+        .records-table th, .records-table td {
+            padding: 8px; /* Adds padding to the cells */
+            text-align: left; /* Aligns text to the left */
+            border: 1px solid #ddd; /* Adds a light border */
+        }
+        
+        .time-column {
+            width: 25%; /* Takes up 25% of the total width */
+        }
+        
+        .record-column {
+            width: 75%; /* Takes up 75% of the total width */
+        }
+        
+        /* Optional: Add some styling for the table header */
+        .records-table thead th {
+            background-color: #f2f2f2; /* Light grey background for header */
+            font-weight: bold; /* Bold text for header */
+        }
+
+        tr a{
+            color:black
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AskToYaana</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <span class="nav-link">Hello, {{request.user}} </span>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}"><button class="btn btn-outline-danger">Logout</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="text-generation-section">
+            <!-- Left Section -->
+            <div class="input-section">
+                <h4>Text Generation</h4>
+                <form id="text-generation-form" method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="inputText">Enter your text:</label> <br>
+                        <input class='styled-input'type="text" name="input_text">
+                        {% comment %} <div class ='styled-input' >{{form.query}}</div> {% endcomment %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {% if response %}
+                        <p>{{ response|linebreaks| safe }}</p>
+                    {% endif %}     
+                </form>
+                
+                <div id="generated-text" class="mt-3"></div>
+                
+            </div>
+
+            <!-- Right Section -->
+            <div class="records-section overflow">
+                <h4>Past Records</h4>
+                <ul id="records-list" class="list-group">
+                    <!-- Records will be dynamically added here -->
+                    <table class="records-table">
+                        <thead>
+                            <tr>
+                                <th class="time-column">Time</th>
+                                <th class="time-column">Input Text</th>
+                                <th class="record-column">Record</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in past_records %}
+                            
+                                <tr>
+                                    <td><a href= {% url "record_detail" record.id %}>{{ record.created_at|date:"H:i:s" }}</a></td>
+                                    <td><a href= {% url "record_detail" record.id %}>{{record.input_text|safe}}</a></td>
+                                    <td>
+                                        <a href= {% url "record_detail" record.id %}><p>{{ record.text|linebreaks| safe | truncatechars:200}}</p></a>      
+                                    </td>
+                                </a>
+                                </tr>
+                            
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+</body>
+</html>

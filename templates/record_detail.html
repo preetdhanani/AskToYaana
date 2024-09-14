@@ -1,0 +1,17 @@
+
+<!-- templates/record_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ record.name }} Details</title>
+</head>
+<body>
+    <h2><a href="{% url 'AskToYaana' %}">Back to list</a></h2>
+    <h1>{{ record.input_text }}</h1>
+    <p><strong>Created At:</strong> {{ record.created_at|date:"Y-m-d H:i:s" }}</p>
+    <p>{{record.text |safe |linebreaks}}</p>
+    
+</body>
+</html>

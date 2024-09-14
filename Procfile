@@ -1,1 +1,1 @@
-web: gunicorn AskToYaana.wsgi
+web: gunicorn AskToYaana.wsgi:application

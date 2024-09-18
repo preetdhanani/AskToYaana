@@ -22,6 +22,7 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/yourusername/asktoyaana.git
    cd asktoyaana
+   ```
 2. **Create a virtual environment (optional but recommended)**:
   ```
    python -m venv venv
@@ -35,12 +36,10 @@ Ensure you have the following installed:
 4. **Apply database migrations**:
    ```
    python manage.py migrate
-   
    ```
 5. **Create a superuser (for admin access)**:
    ```
    python manage.py createsuperuser
-
    ```
 6. **Run the development server**:
    ```

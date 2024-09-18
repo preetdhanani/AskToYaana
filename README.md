@@ -27,3 +27,13 @@ Ensure you have the following installed:
   ```bash
   python -m venv venv
   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+3. **Install the required packages**:
+
+   bash```
+   
+   pip install -r requirements.txt
+
+
+
+

@@ -22,15 +22,15 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/yourusername/asktoyaana.git
    cd asktoyaana
-   
+   ```   
 2. **Create a virtual environment (optional but recommended)**:
-  ```bash
+   ```bash
   python -m venv venv
   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-
+   ```
 3. **Install the required packages**:
 
-   bash```
+   ```bash
    
    pip install -r requirements.txt
 

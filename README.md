@@ -1,7 +1,7 @@
 # AskToYaana
 
 **AskToYaana** is an AI-powered beauty recommendation app that offers personalized skincare advice, product recommendations, and nutritional tips based on user input.
-- [Demo Video of Project]([https://pip.pypa.io/en/stable/](https://drive.google.com/file/d/1ZhRqnPzsUK8WUvx9WybhMFwsxcTRHaLg/view))
+- [Demo Video of Project](https://drive.google.com/file/d/1ZhRqnPzsUK8WUvx9WybhMFwsxcTRHaLg/view)
 ## Features
 
 - Personalized skincare recommendations
